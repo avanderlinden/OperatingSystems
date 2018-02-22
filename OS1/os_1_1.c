@@ -3,7 +3,7 @@
  Name        : os_1_1.c
  Author      : Alex van der Linden
  Version     :
- Description :
+ Description : Prints Student name and number, and process ID.
  ============================================================================
  */
 
