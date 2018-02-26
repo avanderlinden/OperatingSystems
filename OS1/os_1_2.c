@@ -14,73 +14,63 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-int exec_cmd(char* cmd, char* result) {
-  int exit_code;
-  int pipefd[2];
-  FILE *cmd_output;
-  char buf[1024];
-  int status;
+int exec_cmd(char* cmd, char result[]) {
+	int pid;
+	int pipefd[2];
+	FILE *cmd_output;
+	char buf[1024];
+	int status;
 
-  // create a pipe for terminal answer
-  exit_code = pipe(pipefd);
-  if (exit_code < 0) {
-    perror("pipe");
-    return -1;
-  }
+	// create a pipe for terminal answer
+	pid = pipe(pipefd);
+	if (pid < 0) {
+	perror("pipe");
+	return -1;
+	}
 
-  // forking this process
-  exit_code = fork();
+	// forking this process
+	pid = fork();
+	if(pid < 0) {
+	  perror("fork");
+	  exit(-1);
+	}
 
-  if (exit_code == 0) {
-    dup2(pipefd[1], STDOUT_FILENO); // duplicate STDOUT to our pipe
-    close(pipefd[0]); // close our pipe
-    close(pipefd[1]);
+	// run command
+	if (pid == 0) {
+	dup2(pipefd[1], STDOUT_FILENO); // duplicate STDOUT to our pipe
+	close(pipefd[0]); // close our pipe
+	close(pipefd[1]);
 
-    execl("/bin/bash", "bash", "-c", cmd, NULL); // run command using bash
-  }
+	execl("/bin/bash", "bash", "-c", cmd, NULL); // run command using bash
+	}
 
-  //else // forking failed
-  //{
-  //  perror("fork");
-  //  return -1;
-  //}
+	close(pipefd[1]); /* Close writing end of pipe */
+	cmd_output = fdopen(pipefd[0], "r");
 
-  /* Parent process */
-  close(pipefd[1]); /* Close writing end of pipe */
+	fgets(result, sizeof buf, cmd_output); // write file to result
 
-  cmd_output = fdopen(pipefd[0], "r");
-
-  if (fgets(result, sizeof buf, cmd_output)) {
-    printf("Data from who command: %s\n", result);
-  } else {
-    printf("No data received.\n");
-  }
-
-  return 0;
+	return 0;
 }
 
 int main() {
-   char cwd[1024];
-   if (getcwd(cwd, sizeof(cwd)) != NULL)
-       fprintf(stdout, "Current working dir: %s\n", cwd);
-   else
-   {
-       perror("getcwd() error");
-   	   return -1;
-   }
+    char pwd[1024];
+    char cmd[1024];
+    char result[] = "";
 
+    // get current working directory
+    getcwd(pwd, sizeof(pwd));
 
-   //execl("sh", "sh", "-c", "ls -alh", NULL)
-   char* result = "";
+    sprintf(cmd, "mkdir %s/folder", pwd);
 
-   exec_cmd("ps -aux | grep \"os_1_2\"", result);
-
-   printf("Result: %s", result);
+    exec_cmd(cmd, result); // create folder
+    //result = "";
+    exec_cmd(cmd, result); // create folder
+    //printf("Result: %s\n", result);
 
 
 
 
-   return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
 
 
