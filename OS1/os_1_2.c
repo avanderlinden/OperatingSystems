@@ -13,102 +13,62 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <fcntl.h>
 
-int exec_cmd(char* cmd, char result[]) {
-	int pid;
-	int pipefd[2];
-	FILE *cmd_output;
-	char buf[1024];
-	int status;
+int exec_cmd(char* cmd) {
+	int filefd = open("stdout.txt", O_WRONLY|O_CREAT, 0666);
 
-	// create a pipe for terminal answer
-	pid = pipe(pipefd);
-	if (pid < 0) {
-	perror("pipe");
-	return -1;
+	if(!fork()) {
+	    close(1); // close stout
+	    //close(2); // close stderr
+	    dup(filefd);
+	    execlp("/bin/bash", "bash", "-c", cmd, NULL);
+	}
+	else {
+	    close(filefd);
+	    wait(NULL);
+	    return EXIT_FAILURE;
 	}
 
-	// forking this process
-	pid = fork();
-	if(pid < 0) {
-	  perror("fork");
-	  exit(-1);
-	}
+	return EXIT_SUCCESS;
+}
 
-	// run command
-	if (pid == 0) {
-	dup2(pipefd[1], STDOUT_FILENO); // duplicate STDOUT to our pipe
-	close(pipefd[0]); // close our pipe
-	close(pipefd[1]);
+char* get_stdout(void) {
+    char *file_contents;
+    long input_file_size;
 
-	execl("/bin/bash", "bash", "-c", cmd, NULL); // run command using bash
-	}
+    FILE *input_file = fopen("stdout.txt", "rb");
+    fseek(input_file, 0, SEEK_END);
+    input_file_size = ftell(input_file);
+    rewind(input_file);
+    file_contents = malloc(input_file_size * (sizeof(char)));
+    fread(file_contents, sizeof(char), input_file_size, input_file);
+    fclose(input_file);
 
-	close(pipefd[1]); /* Close writing end of pipe */
-	cmd_output = fdopen(pipefd[0], "r");
-
-	fgets(result, sizeof buf, cmd_output); // write file to result
-
-	return 0;
+    return file_contents;
 }
 
 int main() {
     char pwd[1024];
     char cmd[1024];
-    char result[] = "";
 
     // get current working directory
     getcwd(pwd, sizeof(pwd));
 
+    // remove folder
+    // sprintf(cmd, "rm -r %s/folder", pwd);
+    // exec_cmd(cmd);
+
+    // create folder
     sprintf(cmd, "mkdir %s/folder", pwd);
+    exec_cmd(cmd);
 
-    exec_cmd(cmd, result); // create folder
-    //result = "";
-    exec_cmd(cmd, result); // create folder
-    //printf("Result: %s\n", result);
+    // list dir content
+    sprintf(cmd, "ls -alh %s", pwd);
+    exec_cmd(cmd);
 
 
-
+    printf("Result: %s\n", get_stdout());
 
     return EXIT_SUCCESS;
 }
-
-
-//int cmd_quem(void) {
-//  int result;
-//  int pipefd[2];
-//  FILE *cmd_output;
-//  char buf[1024];
-//  int status;
-//
-//  result = pipe(pipefd);
-//  if (result < 0) {
-//    perror("pipe");
-//    exit(-1);
-//  }
-//
-//  result = fork();
-//  if(result < 0) {
-//    exit(-1);
-//  }
-//
-//  if (result == 0) {
-//    dup2(pipefd[1], STDOUT_FILENO); /* Duplicate writing end to stdout */
-//    close(pipefd[0]);
-//    close(pipefd[1]);
-//
-//    execl("/usr/bin/who", "who", NULL);
-//    _exit(1);
-//  }
-//
-//  /* Parent process */
-//  close(pipefd[1]); /* Close writing end of pipe */
-//
-//  cmd_output = fdopen(pipefd[0], "r");
-//
-//  if (fgets(buf, sizeof buf, cmd_output)) {
-//    printf("Data from who command: %s\n", buf);
-//  } else {
-//    printf("No data received.\n");
-//  }
-
