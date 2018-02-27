@@ -3,7 +3,9 @@
  Name        : os_1_1.c
  Author      : Alex van der Linden
  Version     :
- Description : Prints Student name and number, and process ID.
+ Description : Creates a Child process with Fork() and print content of app's
+               directory.
+ Notes       : Compile with: make os_1_3
  ============================================================================
  */
 #include <unistd.h>

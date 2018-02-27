@@ -4,6 +4,7 @@
  Author      : Alex van der Linden
  Version     :
  Description : Prints Student name and number, and process ID.
+ Notes       : Compile with: make os_1_1
  ============================================================================
  */
 

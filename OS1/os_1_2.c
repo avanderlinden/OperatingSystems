@@ -3,7 +3,8 @@
  Name        : os_1_1.c
  Author      : Alex van der Linden
  Version     :
- Description :
+ Description : Creates a folder in app's dir and prints content of app's dir
+ Notes       : Compile with: make os_1_2
  ============================================================================
  */
 
