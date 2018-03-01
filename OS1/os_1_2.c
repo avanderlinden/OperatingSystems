@@ -15,6 +15,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <fcntl.h>
+#include <sys/stat.h>
+
+
 
 int exec_cmd(char* cmd) {
 	int filefd = open("stdout.txt", O_WRONLY|O_CREAT, 0666);
@@ -59,6 +62,8 @@ int main() {
     // remove folder
     // sprintf(cmd, "rm -r %s/folder", pwd);
     // exec_cmd(cmd);
+
+    mkdir("./folder2", 0666);
 
     // create folder
     sprintf(cmd, "mkdir %s/folder", pwd);
