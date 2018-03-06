@@ -51,8 +51,6 @@ void *wait_for_input(void *goal_ptr){
         fgets(str_value, 1024, stdin);
 
         if ((str_value[0] == '-') && (str_value[1] == '1')){
-            run_flag = FALSE;
-            *goal = -1;
             break;
         }
 
@@ -85,22 +83,14 @@ void *wait_for_input(void *goal_ptr){
 }
 
 void *count_towards_goal(void *goal_ptr){
-    int run_flag =  TRUE;
+    int run_flag = TRUE;
     int *goal = (int *)goal_ptr;
     int value = *goal;
 
     while(run_flag){
         while(value == *goal){}
-
-        if (*goal == -1) {
-            run_flag = FALSE;
-            printf("Ending led count thread\n");
-            break;
-        }
-        else {
-            value = *goal;
-            printf("\nNew Goal = %d\n", value);
-        }
+        value = *goal;
+        printf("\nNew Goal = %d\n", value);
 
         for(int i=0; i<=value; i++){
             //printf("%d", i);
@@ -108,20 +98,19 @@ void *count_towards_goal(void *goal_ptr){
             usleep(500000);
 
             if(!(value == *goal)) {
-                if(*goal == -1){
-                    run_flag = FALSE;
-                    printf("Ending led count thread\n");
-                    break;
-                }
-                else {
-                    printf("\nNew Goal before end = %d\n", *goal);
-                    i=0;
-                    value = *goal;
-                }
+                printf("\nNew Goal before end = %d\n", *goal);
+                i=0;
+                value = *goal;
             }
         }
     }
 }
+
+void *read_and_compute(){
+
+
+}
+
 
 int main( int argc, char *argv[] ) {
 
@@ -135,6 +124,7 @@ int main( int argc, char *argv[] ) {
 
     pthread_t input_thread;
     pthread_t led_counter_thread;
+    pthread_t read_and_compute_thread;
     int exit_code;
     int goal = 0;
     int *goal_ptr = &goal;
@@ -148,8 +138,7 @@ int main( int argc, char *argv[] ) {
         printf("Created new input thread\n");
     }
 
-    exit_code = pthread_create(&led_counter_thread, NULL, count_towards_goal,
-                               goal_ptr);
+    exit_code = pthread_create(&led_counter_thread, NULL, count_towards_goal,goal_ptr);
     if(exit_code > 0) {
         printf("Can't create thread");
         return EXIT_FAILURE;
@@ -163,15 +152,8 @@ int main( int argc, char *argv[] ) {
         printf("Can't join thread");
         return EXIT_FAILURE;
     }
-    printf("Input thread ended\n");
 
-    exit_code = pthread_join(led_counter_thread, NULL);
-    if(exit_code > 0) {
-        printf("Can't join thread");
-        return EXIT_FAILURE;
-    }
-    printf("led_counter_thread ended\n");
-
+    pthread_exit(&led_counter_thread);
 
     return EXIT_SUCCESS;
 }
