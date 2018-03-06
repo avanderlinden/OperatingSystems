@@ -8,6 +8,8 @@
 #include <limits.h>
 #include <pthread.h>
 #include <ctype.h>
+#include <math.h>
+#include <time.h>
 
 #define LED1 7
 #define LED2 0
@@ -51,6 +53,8 @@ void *wait_for_input(void *goal_ptr){
         fgets(str_value, 1024, stdin);
 
         if ((str_value[0] == '-') && (str_value[1] == '1')){
+            run_flag = FALSE;
+            *goal = -1;
             break;
         }
 
@@ -79,18 +83,27 @@ void *wait_for_input(void *goal_ptr){
         }
     }
     printf("Ending input thread\n");
+    return EXIT_SUCCESS;
 
 }
 
 void *count_towards_goal(void *goal_ptr){
-    int run_flag = TRUE;
+    int run_flag =  TRUE;
     int *goal = (int *)goal_ptr;
     int value = *goal;
 
     while(run_flag){
         while(value == *goal){}
-        value = *goal;
-        printf("\nNew Goal = %d\n", value);
+
+        if (*goal == -1) {
+            run_flag = FALSE;
+            printf("Ending led count thread\n");
+            break;
+        }
+        else {
+            value = *goal;
+            printf("\nNew Goal = %d\n", value);
+        }
 
         for(int i=0; i<=value; i++){
             //printf("%d", i);
@@ -98,16 +111,64 @@ void *count_towards_goal(void *goal_ptr){
             usleep(500000);
 
             if(!(value == *goal)) {
-                printf("\nNew Goal before end = %d\n", *goal);
-                i=0;
-                value = *goal;
+                if(*goal == -1){
+                    run_flag = FALSE;
+                    printf("Ending led count thread\n");
+                    break;
+                }
+                else {
+                    printf("\nNew Goal before end = %d\n", *goal);
+                    i=0;
+                    value = *goal;
+                }
             }
         }
     }
+    return EXIT_SUCCESS;
 }
 
-void *read_and_compute(){
+void *read_and_compute(void *run_flag_ptr){
+    int *run_flag = (int *)run_flag_ptr;
 
+    FILE *fp;
+    char *line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
+    double value = 0.0;
+    double result = 0.0;
+
+    fp = fopen("./data.txt", "r");
+    if (fp == NULL) {
+        printf("Error reading file\n");
+        *run_flag = FALSE;
+    }
+
+    clock_t start_clk = clock();
+
+    while (((read = getline(&line, &len, fp)) != -1) && (*run_flag == TRUE)) {
+        value = (double) strtod(line, NULL);
+        result += atan(tan(value));
+    }
+
+    clock_t clk_end = clock();
+    double time = (double)(clk_end - start_clk) / CLOCKS_PER_SEC;
+
+
+    if(*run_flag){
+        printf("Result: %2f\n", result);
+        printf("Time[ms]: %f1\n", time);
+    }
+    else {
+        printf("Result so far: %2f\n", result);
+        printf("Time so far [ms]: %f1\n", time);
+    }
+
+    fclose(fp);
+    if (line)
+        free(line);
+
+    return EXIT_SUCCESS;
 
 }
 
@@ -138,7 +199,8 @@ int main( int argc, char *argv[] ) {
         printf("Created new input thread\n");
     }
 
-    exit_code = pthread_create(&led_counter_thread, NULL, count_towards_goal,goal_ptr);
+    exit_code = pthread_create(&led_counter_thread, NULL,
+                               count_towards_goal, goal_ptr);
     if(exit_code > 0) {
         printf("Can't create thread");
         return EXIT_FAILURE;
@@ -147,13 +209,43 @@ int main( int argc, char *argv[] ) {
         printf("Created new led counter thread\n");
     }
 
+    int compute_run_flag = TRUE;
+    int *compute_run_flag_ptr = &compute_run_flag;
+
+    exit_code = pthread_create(&read_and_compute_thread, NULL,
+                               read_and_compute, compute_run_flag_ptr);
+    if(exit_code > 0) {
+        printf("Can't create thread");
+        return EXIT_FAILURE;
+    }
+    else {
+        printf("Created new compute thread\n");
+    }
+
+
+
+
     exit_code = pthread_join(input_thread, NULL);
     if(exit_code > 0) {
         printf("Can't join thread");
         return EXIT_FAILURE;
     }
 
-    pthread_exit(&led_counter_thread);
+    exit_code = pthread_join(led_counter_thread, NULL);
+    if(exit_code > 0) {
+        printf("Can't join thread");
+        return EXIT_FAILURE;
+    }
+    printf("led counter thread ended\n");
+
+    compute_run_flag = FALSE;
+
+    exit_code = pthread_join(read_and_compute_thread, NULL);
+    if(exit_code > 0) {
+        printf("Can't join thread");
+        return EXIT_FAILURE;
+    }
+    printf("read and compute thread ended\n");
 
     return EXIT_SUCCESS;
 }
