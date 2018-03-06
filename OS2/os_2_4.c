@@ -160,11 +160,11 @@ void *read_and_compute(void *run_flag_ptr){
 
 
     if(*run_flag){
-        printf("Result: %2f\n", result);
+        printf("\nResult: %2f\n", result);
         printf("Time[ms]: %f1\n", time);
     }
     else {
-        printf("Result so far: %2f\n", result);
+        printf("\nResult so far: %2f\n", result);
         printf("Time so far [ms]: %f1\n", time);
     }
 
@@ -205,23 +205,25 @@ int main( int argc, char *argv[] ) {
 
     struct sched_param param;
 
+    //printf("%d, %d, %d, %d\n", EAGAIN, EAGAIN, EINVAL, EPERM);
+
     param.sched_priority = 10; //Sets the priority of the thread
-    pthread_attr_setschedparam(&attr, &param);
+    exit_code = pthread_attr_setschedparam(&attr, &param);
     exit_code = pthread_create(&read_and_compute_thread, &attr,
                                read_and_compute, compute_run_flag_ptr);
-
-    printf("exit_code: %d", exit_code);
+    if(exit_code == EPERM){
+        printf("Error EPERM: No permission to set the scheduling "
+                "policy and parameters specified in attr\n");
+    }
 
     pthread_t input_thread;
     pthread_t led_counter_thread;
 
     exit_code = pthread_create(&input_thread, NULL,
                                wait_for_input, goal_ptr);
-    printf("exit_code: %d", exit_code);
 
     exit_code = pthread_create(&led_counter_thread, NULL,
                                count_towards_goal, goal_ptr);
-    printf("exit_code: %d", exit_code);
 
 
 
