@@ -7,6 +7,7 @@
 #include <inttypes.h>
 #include <limits.h>
 #include <pthread.h>
+#include <ctype.h>
 
 #define LED1 7
 #define LED2 0
@@ -45,22 +46,60 @@ void *wait_for_input(void *goal_ptr){
 
 
 	while(run_flag) {
-		printf("osh>");
+		printf("goal>");
 		fflush(stdout);
 		fgets(str_value, 1024, stdin);
-		str_value[strcspn(str_value, "\n")] = 0;
 
+		int no_digit = FALSE;
+
+		for(int i = 0; i < sizeof(str_value); i++) {
+		    if(str_value[i]=='\n')
+		        break;
+
+            if(isdigit(str_value[i]) == 0){
+             printf("no digit\n");
+             no_digit = TRUE;
+            }
+		}
+
+		str_value[strcspn(str_value, "\n")] = 0;
 		value = (int) strtol(str_value, &endptr, 10);
 
-
-
+		if (value < 0 || value > 15 || no_digit){
+		    printf("Invalid input provided, must be integer between 0 and 15\n");
+		    continue;
+		}
+		else {
+		    *goal = value;
+		    usleep(2000000);
+		}
 	}
-
-
 }
 
-void count_towards_goal(void *goal_ptr)
+void *count_towards_goal(void *goal_ptr){
+    int run_flag = TRUE;
+    int *goal = (int *)goal_ptr;
+    int value = *goal;
 
+
+    while(run_flag){
+        while(value == *goal){}
+        value = *goal;
+        printf("\nNew Goal = %d\n", value);
+
+        for(int i=0; i<=value; i++){
+            //printf("%d", i);
+            led_it_shine(i);
+            usleep(200000);
+
+            if(!(value == *goal)) {
+                printf("\nNew Goal before end = %d\n", *goal);
+                i=0;
+                value = *goal;
+            }
+        }
+    }
+}
 
 
 int main( int argc, char *argv[] ) {
@@ -68,31 +107,43 @@ int main( int argc, char *argv[] ) {
 	wiringPiSetup();
 
 	pinMode(LED1, OUTPUT);
+	pinMode(LED2, OUTPUT);
+	pinMode(LED3, OUTPUT);
+	pinMode(LED4, OUTPUT);
 
-	digitalWrite(LED1, HIGH);
-	digitalWrite(LED1, LOW);
 
-	int value = 0;
-	char *endptr;
+	pthread_t input_thread;
+	pthread_t led_counter_thread;
+	int exit_code;
+	int goal = 0;
+	int *goal_ptr = &goal;
 
-	if( argc == 2 ) {
-	      value = (int) strtol(argv[1], &endptr, 10);
-	      if (value < 0 || value > 15 || endptr == argv[1]){
-	    	  	  printf("Illigal input value, expecting decimal number "
-	    	  	    	  			"between 0-15\n");
-	      }
-	      else {
-	    	  	  led_it_shine(value);
-	      }
-	   }
-	   else if( argc > 2 ) {
-	      printf("Too many arguments, expecting 1 "
-	    		  "decimal number between 0-15.\n");
-	   }
-	   else {
-	      printf("Too few arguments, expecting 1 "
-	    		  "decimal number between 0-15.\n");
-	   }
+	exit_code = pthread_create(&input_thread, NULL, wait_for_input, goal_ptr);
+    if(exit_code > 0) {
+        printf("Can't create thread");
+        return EXIT_FAILURE;
+    }
+    else {
+        printf("Created new input thread\n");
+    }
+
+    exit_code = pthread_create(&led_counter_thread, NULL, count_towards_goal,goal_ptr);
+    if(exit_code > 0) {
+        printf("Can't create thread");
+        return EXIT_FAILURE;
+    }
+    else {
+        printf("Created new led counter thread\n");
+    }
+
+
+    exit_code = pthread_join(input_thread, NULL);
+    if(exit_code > 0) {
+        printf("Can't join thread");
+        return EXIT_FAILURE;
+    }
+
+
 
 	return EXIT_SUCCESS;
 }
