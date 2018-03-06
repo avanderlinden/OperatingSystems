@@ -17,7 +17,6 @@ const int LedArray[4] = {LED1, LED2, LED3, LED4};
 void led_it_shine(int value){
 
 	int ArrayLength = (int) (sizeof(LedArray) / sizeof(LedArray[0])) -1;
-	//printf("3\\ .. /0\n  ");
 
 	for(int i = ArrayLength; i>=0; i--) {
 		int mask = 0;

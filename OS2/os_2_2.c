@@ -19,7 +19,6 @@ const int LedArray[4] = {LED1, LED2, LED3, LED4};
 void led_it_shine(int value){
 
     int ArrayLength = (int) (sizeof(LedArray) / sizeof(LedArray[0])) -1;
-    //printf("3\\ .. /0\n  ");
 
     for(int i = ArrayLength; i>=0; i--) {
         int mask = 0;
@@ -81,7 +80,7 @@ void *wait_for_input(void *goal_ptr){
         }
     }
     printf("Ending input thread\n");
-
+    return EXIT_SUCCESS;
 }
 
 void *count_towards_goal(void *goal_ptr){
@@ -103,9 +102,8 @@ void *count_towards_goal(void *goal_ptr){
         }
 
         for(int i=0; i<=value; i++){
-            //printf("%d", i);
             led_it_shine(i);
-            usleep(500000);
+            usleep(200000);
 
             if(!(value == *goal)) {
                 if(*goal == -1){
@@ -121,6 +119,7 @@ void *count_towards_goal(void *goal_ptr){
             }
         }
     }
+    return EXIT_SUCCESS;
 }
 
 int main( int argc, char *argv[] ) {
