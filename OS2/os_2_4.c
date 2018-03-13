@@ -95,6 +95,7 @@ void *count_towards_goal(void *goal_ptr){
     int run_flag =  TRUE;
     int *goal = (int *)goal_ptr;
     int value = *goal;
+    int old_value = 0;
 
     while(run_flag){
         while(value == *goal){}
@@ -109,25 +110,66 @@ void *count_towards_goal(void *goal_ptr){
             printf("\nNew Goal = %d\n", value);
         }
 
-        for(int i=0; i<=value; i++){
-            led_it_shine(i);
-            busyWait(500);
-            //usleep(500000);
+        int counting_flag = TRUE;
+        int break_flag = FALSE;
+        while(counting_flag){
+        		if (value > old_value){
+				for(int i=old_value; i<=value; i++){
+					led_it_shine(i);
+					old_value = i;
 
-            if(!(value == *goal)) {
-                if(*goal == -1){
-                    run_flag = FALSE;
-                    printf("Ending led count thread\n");
-                    break;
-                }
-                else {
-                    printf("\nNew Goal before end = %d\n", *goal);
-                    i=0;
-                    value = *goal;
-                }
+					usleep(200000);
+
+					if(!(value == *goal)) {
+						if(*goal == -1){
+							run_flag = FALSE;
+							printf("Ending led count thread\n");
+							break;
+						}
+						else {
+							printf("\nNew Goal before end = %d\n", *goal);
+							//i=0;
+							value = *goal;
+							break_flag = TRUE;
+							break;
+						}
+					}
+				}
+        		}
+
+			else if(value < old_value){
+				for(int i=old_value; i>=value; i--){
+
+				led_it_shine(i);
+				old_value = i;
+
+				usleep(200000);
+
+				if(!(value == *goal)) {
+					if(*goal == -1){
+						run_flag = FALSE;
+						printf("Ending led count thread\n");
+						break;
+					}
+					else {
+						printf("\nNew Goal before end = %d\n", *goal);
+						//i=0;
+						value = *goal;
+						break_flag = TRUE;
+						break;
+					}
+				}
+			  }
+            }
+        		if (!break_flag){
+  			  //printf("stop count\n");
+  			  counting_flag = FALSE;
+        		}
+        		else{
+        			break_flag=FALSE;
+        		}
             }
         }
-    }
     return EXIT_SUCCESS;
 }
 
@@ -207,7 +249,7 @@ int main( int argc, char *argv[] ) {
 
     //printf("%d, %d, %d, %d\n", EAGAIN, EAGAIN, EINVAL, EPERM);
 
-    param.sched_priority = 10; //Sets the priority of the thread
+    param.sched_priority = 20; //Sets the priority of the thread
     exit_code = pthread_attr_setschedparam(&attr, &param);
     exit_code = pthread_create(&read_and_compute_thread, &attr,
                                read_and_compute, compute_run_flag_ptr);
@@ -217,14 +259,20 @@ int main( int argc, char *argv[] ) {
     }
 
     pthread_t input_thread;
-    pthread_t led_counter_thread;
-
     exit_code = pthread_create(&input_thread, NULL,
                                wait_for_input, goal_ptr);
 
-    exit_code = pthread_create(&led_counter_thread, NULL,
-                               count_towards_goal, goal_ptr);
 
+
+    pthread_t led_counter_thread;
+    param.sched_priority = 10; //Sets the priority of the thread
+    exit_code = pthread_attr_setschedparam(&attr, &param);
+    exit_code = pthread_create(&led_counter_thread, &attr,
+                               count_towards_goal, goal_ptr);
+    if(exit_code == EPERM){
+		printf("Error EPERM: No permission to set the scheduling "
+				"policy and parameters specified in attr\n");
+	}
 
 
     exit_code = pthread_join(input_thread, NULL);

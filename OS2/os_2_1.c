@@ -39,6 +39,10 @@ int main( int argc, char *argv[] ) {
 	wiringPiSetup();
 
 	pinMode(LED1, OUTPUT);
+	pinMode(LED2, OUTPUT);
+	pinMode(LED3, OUTPUT);
+	pinMode(LED4, OUTPUT);
+
 
 	digitalWrite(LED1, HIGH);
 	digitalWrite(LED1, LOW);

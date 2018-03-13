@@ -87,6 +87,7 @@ void *count_towards_goal(void *goal_ptr){
     int run_flag =  TRUE;
     int *goal = (int *)goal_ptr;
     int value = *goal;
+    int old_value = 0;
 
     while(run_flag){
         while(value == *goal){}
@@ -101,24 +102,66 @@ void *count_towards_goal(void *goal_ptr){
             printf("\nNew Goal = %d\n", value);
         }
 
-        for(int i=0; i<=value; i++){
-            led_it_shine(i);
-            usleep(200000);
+        int counting_flag = TRUE;
+        int break_flag = FALSE;
+        while(counting_flag){
+        		if (value > old_value){
+				for(int i=old_value; i<=value; i++){
+					led_it_shine(i);
+					old_value = i;
 
-            if(!(value == *goal)) {
-                if(*goal == -1){
-                    run_flag = FALSE;
-                    printf("Ending led count thread\n");
-                    break;
-                }
-                else {
-                    printf("\nNew Goal before end = %d\n", *goal);
-                    i=0;
-                    value = *goal;
-                }
+					usleep(200000);
+
+					if(!(value == *goal)) {
+						if(*goal == -1){
+							run_flag = FALSE;
+							printf("Ending led count thread\n");
+							break;
+						}
+						else {
+							printf("\nNew Goal before end = %d\n", *goal);
+							//i=0;
+							value = *goal;
+							break_flag = TRUE;
+							break;
+						}
+					}
+				}
+        		}
+
+			else if(value < old_value){
+				for(int i=old_value; i>=value; i--){
+
+				led_it_shine(i);
+				old_value = i;
+
+				usleep(200000);
+
+				if(!(value == *goal)) {
+					if(*goal == -1){
+						run_flag = FALSE;
+						printf("Ending led count thread\n");
+						break;
+					}
+					else {
+						printf("\nNew Goal before end = %d\n", *goal);
+						//i=0;
+						value = *goal;
+						break_flag = TRUE;
+						break;
+					}
+				}
+			  }
+            }
+        		if (!break_flag){
+  			  printf("stop count\n");
+  			  counting_flag = FALSE;
+        		}
+        		else{
+        			break_flag=FALSE;
+        		}
             }
         }
-    }
     return EXIT_SUCCESS;
 }
 
