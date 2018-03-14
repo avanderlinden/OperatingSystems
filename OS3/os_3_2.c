@@ -1,4 +1,3 @@
-#include <wiringPi.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -8,38 +7,56 @@
 #include <limits.h>
 #include <pthread.h>
 #include <ctype.h>
-#include <softPwm.h>
-
-#define LED1 7
-#define LED2 0
-#define LED3 2
-#define LED4 3
-
-#define RANGE 100
 
 
 
+// Number of elements to add to the queue
+#define ELEMENTS 100000
+
+pthread_barrier_t bar;
+
+
+/* Struct Node
+ * brightness: brightness variable
+ * duration: duration variable
+ * next: pointer to the next node in the queue.
+ */
 struct Node {
     int brightness;
     int duration; //Stored values
     struct Node* next;
 };
+
+/* Struct Queue
+ * front: first node in the queue
+ * back: last node in the queue
+ * mutex: the mutex that should be locked when
+ * accessing the queue.
+ *
+ */
 struct Queue {
     struct Node* front;
     struct Node* back;
-    pthread_mutex_t* mutex;
+    pthread_mutex_t mutex;
 };
 
-//First node in the queue
-//Last node in the queue
-//Used for mutual exclusion
-//Adds a new node to the back of the queue
+
+/* addToQueue adds a new node to the back of the queue.
+ * The node is initialized with given parameters
+ * brightness and duration.
+ *
+ * @param queue The pointer to the queue where the node
+ * should be added to.
+ * @param brightness The brightness variable to assign to the node.
+ * @param duration The duration variable to assign to the node.
+ */
 void addToQueue(struct Queue* queue, int brightness, int duration) {
     struct Node *node = malloc(sizeof *node);
     node->brightness = brightness;
     node->duration = duration;
     node->next = NULL;
 
+    pthread_mutex_lock(&(queue->mutex));
     if(queue->front == NULL){
         queue->front = node;
         queue->back = node;
@@ -48,20 +65,56 @@ void addToQueue(struct Queue* queue, int brightness, int duration) {
         queue->back->next = node;
         queue->back = node;
     }
+    pthread_mutex_unlock(&(queue->mutex));
 
 }
-//Removes a node from the front of the queue
-//The memory of the removed node has to be freed
-//Returns the values of the removed node via pointers
-//If the queue is empty return -1 for both the brightness and the duration
+
+/* removeFromQueue removes node from front of the queue. values of
+ * the node are returned via the pointers
+ *
+ * @param queue The pointer to the queue where the node
+ * should be removed from.
+ * @param *pBrightness The brightness pointer where the brightness value will
+ * be stored in.
+ * @param *pDuration The duration pointer where the duration value will
+ * be stored in.
+ */
 void removeFromQueue(struct Queue* queue, int* pBrightness, int* pDuration) {
-// Implement
+    pthread_mutex_lock(&(queue->mutex));
+
+    struct Node* node = queue->front;
+    if(node == NULL){
+        *pBrightness = -1;
+        *pDuration = -1;
+    }
+    else {
+
+        queue->front = node->next;
+
+        // for last node
+        if(queue->front == NULL){
+            queue->back = NULL;
+        }
+
+        *pBrightness = node->brightness;
+        *pDuration = node->duration;
+
+        // give back some of that mem
+        free(node);
+    }
+    pthread_mutex_unlock(&(queue->mutex));
 }
-//Returns the length of the queue
+
+/* queueSize returns the length of the queue
+ *
+ * @param queue the pointer to the queue where the size should be
+ * calculated from.
+ *
+ */
 int queueSize(struct Queue* queue) {
     int size = 0;
     struct Node* node;
-    //pthread_mutex_lock(queue->mutex);
+    pthread_mutex_lock(&(queue->mutex));
 
     if(queue->back == NULL){
         size = 0;
@@ -75,140 +128,111 @@ int queueSize(struct Queue* queue) {
         }
     }
 
-    //pthread_mutex_unlock(queue->mutex);
+    pthread_mutex_unlock(&(queue->mutex));
     return size;
 
 }
-//Initializes the values of an already allocated queue struct
-void initQueue(struct Queue* queue) {
-    printf("init q\n");
 
+/* initQueue initializes the queue struct and creates a pthread_mutex.
+ *
+ * @param queue The queue that should be initialized.
+ */
+void initQueue(struct Queue* queue) {
     queue->back = NULL;
     queue->front = NULL;
+
     pthread_mutex_t mutex;
-    pthread_mutex_t* mutex_ptr = &mutex;
-    queue->mutex = mutex_ptr;
 
-    //printf("%#010x\n", mutex_ptr);
-
-    if (pthread_mutex_init(mutex_ptr, NULL) != 0)
+    if (pthread_mutex_init(&mutex, NULL) != 0)
     {
-        printf("\n mutex init failed\n");
+        printf("\nError: mutex init failed\n");
     }
-    //pthread_mutex_unlock(mutex_ptr);
+
+    queue->mutex = mutex;
 }
 
 
 
 
+/* add_elements Thread function that add elements to a given queue.
+ *
+ * @param queue The queue where the elements should be added to.
+ */
+void *add_elements(void* queue){
+    struct Queue *q = (struct Queue *) queue;
 
+    pthread_barrier_wait(&bar);
 
+    int i;
+    for(i=0; i<ELEMENTS; i++){
+        addToQueue(q, 1, 2);
+    }
 
-//void *fade_out(){
-//
-//    pthread_barrier_wait(&bar);
-//
-//    for(int i=RANGE; i>=0; --i){
-//        softPwmWrite(LED1, i);
-//        softPwmWrite(LED2, i);
-//        softPwmWrite(LED3, i);
-//        softPwmWrite(LED4, i);
-//        usleep(100);
-//    }
-//
-//    return EXIT_SUCCESS;
-//}
-//
-//void *fade_in(){
-//
-//    pthread_barrier_wait(&bar);
-//
-//    for(int i=0; i<=RANGE; i++){
-//        softPwmWrite(LED1, i);
-//        softPwmWrite(LED2, i);
-//        softPwmWrite(LED3, i);
-//        softPwmWrite(LED4, i);
-//        usleep(100);
-//    }
-//
-//    return EXIT_SUCCESS;
-//}
+    return EXIT_SUCCESS;
+}
 
+/* remove_elements Thread function that removes all elements from
+ * a given queue.
+ *
+ * @param queue The queue where the elements should be removed from.
+ */
+void *remove_elements(void* queue){
+    struct Queue *q = (struct Queue *) queue;
 
+    int *bright = malloc(sizeof *bright);
+    int *time = malloc(sizeof *time);
+
+    pthread_barrier_wait(&bar);
+
+    int i;
+    for(i=0; i<ELEMENTS; i++){
+        removeFromQueue(q, bright, time);
+        if(*bright == -1 || *time == -1){
+            printf("Error: -1 is returned\n");
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+
+/*
+ * Main
+ */
 int main( int argc, char *argv[] ) {
 
-//    wiringPiSetup();
-//
-//    pinMode(LED1, OUTPUT);
-//    pinMode(LED2, OUTPUT);
-//    pinMode(LED3, OUTPUT);
-//    pinMode(LED4, OUTPUT);
-//
-//    softPwmCreate(LED1, 0, 100);
-//    softPwmCreate(LED2, 0, 100);
-//    softPwmCreate(LED3, 0, 100);
-//    softPwmCreate(LED4, 0, 100);
 
     struct Queue* q = malloc(sizeof *q);
     initQueue(q);
-    printf("q size: %d\n",queueSize(q));
 
-    addToQueue(q, 5, 10);
-    printf("q size: %d\n",queueSize(q));
-    addToQueue(q, 5, 10);
-    printf("q size: %d\n",queueSize(q));
-    addToQueue(q, 5, 10);
-    addToQueue(q, 5, 10);
-    addToQueue(q, 5, 10);
-    printf("q size: %d\n",queueSize(q));
+    pthread_t add_thread_1;
+    pthread_t add_thread_2;
+    pthread_t rm_thread_1;
+    pthread_t rm_thread_2;
 
-    printf("stop\n");
+    pthread_barrier_init(&bar, NULL, 3);
 
-    //
+    // add elements threads
+    pthread_create(&add_thread_1, NULL, add_elements, q);
+    pthread_create(&add_thread_2, NULL, add_elements, q);
+
+    pthread_barrier_wait(&bar);
+
+    pthread_join(add_thread_1, NULL);
+    pthread_join(add_thread_2, NULL);
+
+    printf("size: %d\n", queueSize(q));
+
+    // remove all elements threads
+    pthread_create(&rm_thread_1, NULL, remove_elements, q);
+    pthread_create(&rm_thread_2, NULL, remove_elements, q);
+
+    pthread_barrier_wait(&bar);
+
+    pthread_join(rm_thread_1, NULL);
+    pthread_join(rm_thread_2, NULL);
 
 
-//    pthread_t fade_out_thread;
-//    pthread_t fade_in_thread;
-//    int exit_code;
-//
-//    pthread_barrier_init(&bar, NULL, 3);
-//
-//    exit_code = pthread_create(&fade_out_thread, NULL, fade_out, NULL);
-//    if(exit_code > 0) {
-//        printf("Can't create thread\n");
-//        return EXIT_FAILURE;
-//    }
-//    else {
-//        printf("Created new fade_out_thread\n");
-//    }
-//
-//    exit_code = pthread_create(&fade_in_thread, NULL, fade_in, NULL);
-//    if(exit_code > 0) {
-//        printf("Can't create thread\n");
-//        return EXIT_FAILURE;
-//    }
-//    else {
-//        printf("Created new fade_in_thread\n");
-//    }
-//
-//
-//    pthread_barrier_wait(&bar);
-//
-//    // joining threads
-//    exit_code = pthread_join(fade_out_thread, NULL);
-//    if(exit_code > 0) {
-//        printf("Can't join thread");
-//        return EXIT_FAILURE;
-//    }
-//    printf("fade_out_thread ended\n");
-//
-//    exit_code = pthread_join(fade_in_thread, NULL);
-//    if(exit_code > 0) {
-//        printf("Can't join thread");
-//        return EXIT_FAILURE;
-//    }
-//    printf("fade_in_thread ended\n");
-
+    printf("size: %d\n", queueSize(q));
 
     return EXIT_SUCCESS;
 }
