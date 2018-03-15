@@ -150,6 +150,7 @@ int queueSize(struct Queue* queue) {
 void initQueue(struct Queue* queue) {
     queue->back = NULL;
     queue->front = NULL;
+    queue->led = 0;
 
     pthread_mutex_t mutex;
 
@@ -163,8 +164,8 @@ void initQueue(struct Queue* queue) {
 
 void initShow(){
     //FILE *fp;
-    char *line = NULL;
-    size_t len = 0;
+    //char *line = NULL;
+    //size_t len = 0;
     //ssize_t read;
     int led, brightness, duration;
 
@@ -180,41 +181,75 @@ void initShow(){
 //    }
 
 
-    while (getline(&line, &len, stdin) != -1){
-        sscanf(line, "%d %d %d", &led, &brightness, &duration);
-        addToQueue(qArray[led], brightness, duration);
+//    while (getline(&line, &len, stdin) != -1){
+//        sscanf(line, "%d %d %d", &led, &brightness, &duration);
+//        addToQueue(qArray[led], brightness, duration);
+//
+//        printf("%s", line);
+//    }
 
-        printf("%s", line);
+    char l[1024];
+    while(1){
+    		if(fgets(l, 1024, stdin) != NULL){
+    			//printf("%s", l);
+    			sscanf(l, "%d %d %d", &led, &brightness, &duration);
+    			addToQueue(qArray[led], brightness, duration);
+			printf("l: %d, %d, %d", led, brightness, duration);
+    			qArray[led]->led = led;
+    		}
+    		else{
+    			break;
+    		}
+
     }
 }
 void *led_thread(void* queue){
     struct Queue *q = (struct Queue *) queue;
 
-    int *pBrightness, *pDuration;
+    int brightness = 0;
+    int duration = 0;
 
-    while(1){
-        while(*pBrightness != -1 && *pDuration != -1){
-            removeFromQueue(q, pBrightness, pDuration);
-            softPwmWrite(LedArray[q->led], pBrightness);
-            usleep(pDuration);
+    int *pBrightness = &brightness;
+	int *pDuration = &duration;
+
+    while(1) {
+        while(queueSize(q) > 0){
+        		removeFromQueue(q, pBrightness, pDuration);
+			softPwmWrite(LedArray[q->led], *pBrightness);
+        		printf("set led: %d, %d, %d\n", q->led, *pBrightness, *pDuration);
+        		usleep((*pDuration)*1000);
         }
-        usleep(100);
-    }
 
+        if(queueSize(q) == 0) {
+        		int led = LedArray[q->led];
+        		softPwmWrite(led, 0);
+        }
+        usleep(100000);
+
+    }
 }
 
 
 void *input_thread(){
-    char *line = NULL;
+    //char *line = NULL;
     //size_t len = 0;
-    //int led, brightness, duration;
+    int led, brightness, duration;
 
     char l[1024];
+	while(1){
+		if(fgets(l, 1024, stdin) != NULL) {
+			//printf("%s", l);
+			sscanf(l, "%d %d %d", &led, &brightness, &duration);
+			addToQueue(qArray[led], brightness, duration);
+			qArray[led]->led = led;
+		}
+		else {
+			break;
+		}
 
-    while(1){
-        fgets(l, 1024, stdin);
-        printf("l: %s\n", l);
-    }
+	}
+	//printf("stop input thread\n");
+	return EXIT_SUCCESS;
 }
 
 /*
@@ -222,10 +257,23 @@ void *input_thread(){
  */
 int main( int argc, char *argv[] ) {
     printf("start\n");
-    int status;
+    //int status;
 
     //struct Queue* q = malloc(sizeof *q);
      // = (struct Queue*) malloc(sizeof(struct Queue));
+
+
+    wiringPiSetup();
+
+	pinMode(LED1, OUTPUT);
+	pinMode(LED2, OUTPUT);
+	pinMode(LED3, OUTPUT);
+	pinMode(LED4, OUTPUT);
+
+	softPwmCreate(LED1, 0, 100);
+	softPwmCreate(LED2, 0, 100);
+	softPwmCreate(LED3, 0, 100);
+	softPwmCreate(LED4, 0, 100);
 
     for(int i=0; i<4; i++){
         struct Queue* q = malloc(sizeof *q);
@@ -238,21 +286,29 @@ int main( int argc, char *argv[] ) {
 //    }
 
 
-    initShow();
+    //initShow();
+    fflush(stdin);
+    rewind(stdin);
 
 
-
-
-
-    //pthread_t input_thread_ptr;
-   // pthread_create(&input_thread_ptr, NULL, input_thread, NULL);
+    pthread_t input_thread_ptr;
+    pthread_create(&input_thread_ptr, NULL, input_thread, NULL);
     //pthread_join(input_thread_ptr, NULL);
 
+    //pthread_t ThreadArray[4];
 
+    for(int i=0; i<4; i++){
+    		pthread_t thread;
+    		pthread_create(&thread, NULL, led_thread, qArray[i]);
+    }
+
+
+    while(1);
 
 //    for(int i=0; i<4; i++){
-//
-//    }
+//		pthread_join(ThreadArray[i], NULL);
+//	}
+
 
 
 //

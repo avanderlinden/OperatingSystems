@@ -25,12 +25,12 @@ void *fade_out(){
 
     for(int i=RANGE; i>=0; --i){
         softPwmWrite(LED1, i);
-        softPwmWrite(LED2, i);
-        softPwmWrite(LED3, i);
-        softPwmWrite(LED4, i);
+        //softPwmWrite(LED2, i);
+        //softPwmWrite(LED3, i);
+        //softPwmWrite(LED4, i);
 
-        printf("fout %d\n", i);
-        usleep(100);
+        //printf("fout %d\n", i);
+        usleep(100000);
     }
 
     return EXIT_SUCCESS;
@@ -42,12 +42,12 @@ void *fade_in(){
 
     for(int i=0; i<=RANGE; i++){
         softPwmWrite(LED1, i);
-        softPwmWrite(LED2, i);
-        softPwmWrite(LED3, i);
-        softPwmWrite(LED4, i);
+        //softPwmWrite(LED2, i);
+        //softPwmWrite(LED3, i);
+        //softPwmWrite(LED4, i);
 
-        printf("fin %d\n", i);
-        usleep(100);
+        //printf("fin %d\n", i);
+        usleep(100000);
     }
 
     return EXIT_SUCCESS;
