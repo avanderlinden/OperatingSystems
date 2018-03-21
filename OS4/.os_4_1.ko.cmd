@@ -1,0 +1,1 @@
+cmd_/home/pi/projects/OperatingSystems/OS4/os_4_1.ko := ld -EL -r  -T ./scripts/module-common.lds --build-id  -o /home/pi/projects/OperatingSystems/OS4/os_4_1.ko /home/pi/projects/OperatingSystems/OS4/os_4_1.o /home/pi/projects/OperatingSystems/OS4/os_4_1.mod.o ;  true
