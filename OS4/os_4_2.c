@@ -4,7 +4,7 @@
 #include <linux/device.h>
 #include <linux/fs.h>
 #include <asm/uaccess.h>
-
+#include <linux/mutex.h>
 
 int init_module(void);
 void cleanup_module(void);
@@ -26,7 +26,7 @@ struct device* device;
 
 int DevCounter;
 
-
+struct mutex dev_mutex;
 
 int init_module(void)
 {
@@ -36,6 +36,8 @@ int init_module(void)
     MODULE_VERSION("0.1");
 
     printk(KERN_INFO "Create kernel log device /dev/klog");
+
+    mutex_init(&dev_mutex);
 
     major = register_chrdev(0, "klog", &fops);
     DevCounter = 0;
@@ -69,6 +71,8 @@ void cleanup_module(void)
  */
 static int device_open(struct inode *inode, struct file *file)
 {
+    mutex_lock(&dev_mutex);
+
     if (DevCounter){
         return -EBUSY;
     }
@@ -86,6 +90,8 @@ static int device_release(struct inode *inode, struct file *file)
 {
     DevCounter--;
     module_put(THIS_MODULE);
+
+    mutex_unlock(&dev_mutex);
 
     return 0;
 }

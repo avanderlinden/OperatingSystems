@@ -27,7 +27,6 @@ static struct gpio gpio_config_leds[] = {
 
 int led_flag;
 
-//unsigned long timer_interval_ns = 1e6;
 static struct hrtimer hr_timer;
 
 static ktime_t kt_1s_periode;
@@ -70,7 +69,7 @@ int init_module(void)
     hrtimer_init(&hr_timer, CLOCK_REALTIME, HRTIMER_MODE_REL);
     hr_timer.function = led_timer_control;
 
-    led_flag=HIGH;
+    led_flag = HIGH;
     hrtimer_start(&hr_timer, kt_1s_periode, HRTIMER_MODE_REL);
 
     return 0;
