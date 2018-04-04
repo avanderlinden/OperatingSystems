@@ -1,0 +1,11 @@
+\BOOKMARK [2][-]{section*.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{section*.2}{File Systems in User Space \(FUSE\)}{}% 2
+\BOOKMARK [2][-]{section*.3}{FUSE File operations}{}% 3
+\BOOKMARK [2][-]{section*.4}{The Dumb File System \(DFS\)}{}% 4
+\BOOKMARK [2][-]{section*.5}{Debugging your FUSE program}{}% 5
+\BOOKMARK [2][-]{section*.6}{Assignments}{}% 6
+\BOOKMARK [3][-]{section*.7}{6.1: Reading directories}{section*.6}% 7
+\BOOKMARK [3][-]{section*.8}{6.2: Adding and removing directories}{section*.6}% 8
+\BOOKMARK [3][-]{section*.9}{6.3: Reading and writing files}{section*.6}% 9
+\BOOKMARK [3][-]{section*.10}{6.4: Adding and removing files}{section*.6}% 10
+\BOOKMARK [3][-]{section*.11}{Bonus: Dumber Dumb File System \(DDFS\)}{section*.6}% 11

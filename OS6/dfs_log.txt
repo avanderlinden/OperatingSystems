@@ -1,0 +1,387 @@
+Create DFS
+Create DFS
+Create DFS
+Create DFS
+Create DFS
+mkdir path: /test
+Create DFS
+mkdir path: /test
+Create DFS
+mkdir path: /test67
+Create DFS
+Create DFS
+mkdir path: /testu
+Create DFS
+mkdir path: /test
+Create DFS
+mkdir path: /test
+Create DFS
+mkdir path: /tesa
+Create DFS
+mkdir path: /test
+delPos: 0
+Create DFS
+mkdir path: /test
+delPos: 0
+Create DFS
+mkdir path: /test
+delPos: 0
+memcpy from 1 to 4: Create DFS
+mkdir path: /test
+delPos: 0
+memcpy from 1 to 3: Create DFS
+mkdir path: /test
+delPos: 0
+memcpy from 1 to 3: Create DFS
+mkdir path: /test
+delPos: 0
+memcpy from 1 to 4: dirname: tes
+Create DFS
+mkdir path: /Files/test
+delPos: 0
+dirname: Files/test
+Create DFS
+mkdir path: /Files/test
+delPos: 6
+dirname: test
+wholeRoot: /File]Ó∂Tëˇ∂
+rDelPos: 0
+wholeRoot: /File]Ó∂Tëˇ∂ËÏˇ∂∏E
+Create DFS
+Create DFS
+Create DFS
+mkdir path: /Files/test
+delPos: 6
+dirname: test
+wholeRoot: /File]
+rDelPos: 0
+wholeRoot: /File]
+Create DFS
+Create DFS
+LOG:[mkdir] mkdir path: /Files/test
+LOG:[mkdir] delPos: 6
+LOG:[mkdir] dirname: test
+LOG:[mkdir] wholeRoot: /Fileë
+LOG:[mkdir] rDelPos: 0
+LOG:[mkdir] root: /Fileë
+ERROR: root dir not found 
+Create DFS
+LOG:[mkdir] mkdir path: /Files/test
+LOG:[mkdir] delPos: 6
+LOG:[mkdir] dirname: test
+LOG:[mkdir] wholeRoot: /Fileë
+LOG:[mkdir] rDelPos: 0
+LOG:[mkdir] root: /File
+ERROR: root dir not found 
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: testpêµ∞<Î∂
+Create DFS
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[mkdir] mkdir path: /Files/test
+LOG:[mkdir] delPos: 6
+LOG:[mkdir] dirname: test
+LOG:[mkdir] wholeRoot: /File
+LOG:[mkdir] rDelPos: 0
+LOG:[mkdir] root: /Fil
+ERROR: root dir not found 
+Create DFS
+LOG:[mkdir] mkdir path: /Files/test
+LOG:[mkdir] delPos: 6
+LOG:[mkdir] dirname: test
+LOG:[mkdir] wholeRoot: /Files
+LOG:[mkdir] rDelPos: 0
+LOG:[mkdir] root: /Files
+Create DFS
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[mkdir] mkdir path: /Files/test2
+LOG:[mkdir] delPos: 6
+LOG:[mkdir] dirname: test2
+LOG:[mkdir] wholeRoot: /Files
+LOG:[mkdir] rDelPos: 0
+LOG:[mkdir] root: /Files
+Create DFS
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[mkdir] mkdir path: /Files/test2
+LOG:[mkdir] delPos: 6
+LOG:[mkdir] dirname: test2
+LOG:[mkdir] wholeRoot: /Files
+LOG:[mkdir] rDelPos: 0
+LOG:[mkdir] root: /Files
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+ERROR:[read] file not found in root dir
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+ERROR:[read] file not found in root dir
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+Contents: 
+Welcome to the DFS.
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+Contents: 
+Welcome to the DFS.
+Create DFS
+LOG:[write] read file /Readme.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: Readme.txt
+LOG:[write] Contents: 
+  test678
+
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+test678
+to the DFS.
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+test678
+to the DFS.
+LOG:[write] read file /Readme.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: Readme.txt
+LOG:[write] Contents: 
+  asfd
+
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[write] read file /Readme.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: Readme.txt
+LOG:[write] Contents: 
+  Welcome to the Hello World.
+
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[write] read file /Readme.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: Readme.txt
+LOG:[write] Contents: 
+  Welcome to the Hello World.
+
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[write] read file /Readme.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: Readme.txt
+LOG:[write] Contents: 
+  Welcome to the DFS. test123
+
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[write] read file /Readme.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: Readme.txt
+LOG:[write] Contents: 
+  Welcome to the DFS. sadd
+
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[write] read file /Readme.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: Readme.txt
+LOG:[write] Contents: 
+  Welcome to the DFS. test32412
+
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS. test32412
+
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS. test32412
+
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS. test32412
+
+Create DFS
+LOG:[create] read file /test.png
+LOG:[create] delPos: 0
+LOG:[create] file name: test.png
+LOG:[write] read file /test.png
+LOG:[write] delPos: 0
+LOG:[write] file name: test.png
+LOG:[write] Contents: 
+  test
+
+LOG:[read] read file /test.png
+LOG:[read] delPos: 0
+LOG:[read] file name: test.png
+LOG:[read] Contents: 
+test
+
+Create DFS
+LOG:[unlink] read file /Readme.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: Readme.txt
+LOG:[create] read file /.test.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .test.txt.swp
+LOG:[create] read file /.test.txt.swx
+LOG:[create] delPos: 0
+LOG:[create] file name: .test.txt.swx
+LOG:[unlink] read file /.test.txt.swx
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .test.txt.swx
+LOG:[unlink] read file /.test.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .test.txt.swp
+LOG:[create] read file /.test.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .test.txt.swp
+LOG:[write] read file /.test.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .test.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[unlink] read file /Readme.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: Readme.txt
+LOG:[create] read file /test.txt
+LOG:[create] delPos: 0
+LOG:[create] file name: test.txt
+LOG:[write] read file /test.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: test.txt
+LOG:[write] Contents: 
+  Hello World
+
+LOG:[read] read file /test.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: test.txt
+LOG:[read] Contents: 
+Hello World
+
+LOG:[unlink] read file /test.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: test.txt
+LOG:[read] read file /Files/Important files/Budget.txt
+LOG:[read] delPos: 22
+LOG:[read] file name: Budget.txt
+LOG:[read] wholeRoot: /Files/Important files
+LOG:[read] rDelPos: 0
+LOG:[read] root: /Files/Important files
+LOG:[read] Contents: 
+We're all out of money!
+LOG:[read] read file /Files/Hello.txt
+LOG:[read] delPos: 6
+LOG:[read] file name: Hello.txt
+LOG:[read] wholeRoot: /Files
+LOG:[read] rDelPos: 0
+LOG:[read] root: /Files
+LOG:[read] Contents: 
+Hello there!
+LOG:[read] read file /Files/Hello2.txt
+LOG:[read] delPos: 6
+LOG:[read] file name: Hello2.txt
+LOG:[read] wholeRoot: /Files
+LOG:[read] rDelPos: 0
+LOG:[read] root: /Files
+LOG:[read] Contents: 
+Hello there!
+LOG:[read] read file /Pictures/some_image
+LOG:[read] delPos: 9
+LOG:[read] file name: some_image
+LOG:[read] wholeRoot: /Pictures
+LOG:[read] rDelPos: 0
+LOG:[read] root: /Pictures
+LOG:[read] Contents: 
+I am an image
+LOG:[read] read file /Pictures/some_other_image
+LOG:[read] delPos: 9
+LOG:[read] file name: some_other_image
+LOG:[read] wholeRoot: /Pictures
+LOG:[read] rDelPos: 0
+LOG:[read] root: /Pictures
+LOG:[read] Contents: 
+I too am an image
+Create DFS
+LOG:[unlink] read file /Readme.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: Readme.txt
+Create DFS
+LOG:[unlink] read file /Readme.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: Readme.txt
