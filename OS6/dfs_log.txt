@@ -385,3 +385,776 @@ Create DFS
 LOG:[unlink] read file /Readme.txt
 LOG:[unlink] delPos: 0
 LOG:[unlink] file name: Readme.txt
+Create DFS
+Create DFS
+Create DFS
+Create DFS
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[write] read file /.Readme.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .Readme.txt.swp
+LOG:[write] Contents: 
+  b0nano 2.7.4
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[create] read file /test/file.txt
+LOG:[create] delPos: 5
+LOG:[create] file name: file.txt
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[rmdir] delete directory /test
+LOG:[read] read file /Files/Hello.txt
+LOG:[read] delPos: 6
+LOG:[read] file name: Hello.txt
+LOG:[read] wholeRoot: /Files
+LOG:[read] rDelPos: 0
+LOG:[read] root: /Files
+LOG:[read] Contents: 
+Hello there!
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[write] read file /.Readme.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .Readme.txt.swp
+LOG:[write] Contents: 
+  b0nano 2.7.4
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[create] read file /.Readme.txt.swx
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swx
+LOG:[unlink] read file /.Readme.txt.swx
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .Readme.txt.swx
+LOG:[unlink] read file /.Readme.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .Readme.txt.swp
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[write] read file /.Readme.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .Readme.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+Create DFS
+LOG:[unlink] read file /Readme.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: Readme.txt
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[create] read file /test/test.txt
+LOG:[create] delPos: 5
+LOG:[create] file name: test.txt
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[write] read file /test/test.txt
+LOG:[write] delPos: 5
+LOG:[write] file name: test.txt
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  hello
+
+LOG:[read] read file /test/test.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: test.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+hello
+êµ
+Create DFS
+Create DFS
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[create] read file /test/test.txt
+LOG:[create] delPos: 5
+LOG:[create] file name: test.txt
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[write] read file /test/test.txt
+LOG:[write] delPos: 5
+LOG:[write] file name: test.txt
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  test123
+
+LOG:[read] read file /test/test.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: test.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+test123
+
+LOG:[read] read file /test/test.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: test.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+test123
+
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[read] read file /test/test.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: test.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+test123
+
+LOG:[create] read file /test/.test.txt.swp
+LOG:[create] delPos: 5
+LOG:[create] file name: .test.txt.swp
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[create] read file /test/.test.txt.swx
+LOG:[create] delPos: 5
+LOG:[create] file name: .test.txt.swx
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[unlink] read file /test/.test.txt.swx
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: .test.txt.swx
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[unlink] read file /test/.test.txt.swp
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: .test.txt.swp
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[create] read file /test/.test.txt.swp
+LOG:[create] delPos: 5
+LOG:[create] file name: .test.txt.swp
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[write] read file /test/.test.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .test.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[write] read file /test/.test.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .test.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  b0VIM 8.0
+Create DFS
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[create] read file /test/tets.txt
+LOG:[create] delPos: 5
+LOG:[create] file name: tets.txt
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[write] read file /test/tets.txt
+LOG:[write] delPos: 5
+LOG:[write] file name: tets.txt
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  test
+
+LOG:[create] read file /test/.tets.txt.swp
+LOG:[create] delPos: 5
+LOG:[create] file name: .tets.txt.swp
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[write] read file /test/.tets.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .tets.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  b0nano 2.7.4
+Create DFS
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[create] read file /.Readme.txt.swx
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swx
+LOG:[unlink] read file /.Readme.txt.swx
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .Readme.txt.swx
+LOG:[unlink] read file /.Readme.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .Readme.txt.swp
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[write] read file /.Readme.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .Readme.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+Create DFS
+Create DFS
+LOG:[create] read file /file
+LOG:[create] delPos: 0
+LOG:[create] file name: file
+LOG:[write] read file /file
+LOG:[write] delPos: 0
+LOG:[write] file name: file
+LOG:[write] Contents: 
+  bla
+
+LOG:[read] read file /file
+LOG:[read] delPos: 0
+LOG:[read] file name: file
+LOG:[read] Contents: 
+bla
+
+Create DFS
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[create] read file /.Readme.txt.swx
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swx
+LOG:[unlink] read file /.Readme.txt.swx
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .Readme.txt.swx
+LOG:[unlink] read file /.Readme.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .Readme.txt.swp
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[write] read file /.Readme.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .Readme.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+Create DFS
+LOG:[create] read file /.hiddenfile
+LOG:[create] delPos: 0
+LOG:[create] file name: .hiddenfile
+LOG:[write] read file /.hiddenfile
+LOG:[write] delPos: 0
+LOG:[write] file name: .hiddenfile
+LOG:[write] Contents: 
+  test
+
+LOG:[read] read file /.hiddenfile
+LOG:[read] delPos: 0
+LOG:[read] file name: .hiddenfile
+LOG:[read] Contents: 
+test
+
+LOG:[unlink] read file /.hiddenfile
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .hiddenfile
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[write] read file /.Readme.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .Readme.txt.swp
+LOG:[write] Contents: 
+  b0nano 2.7.4
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+Create DFS
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[create] read file /.Readme.txt.swx
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swx
+LOG:[unlink] read file /.Readme.txt.swx
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .Readme.txt.swx
+LOG:[unlink] read file /.Readme.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .Readme.txt.swp
+LOG:[create] read file /.Readme.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .Readme.txt.swp
+LOG:[write] read file /.Readme.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .Readme.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+Create DFS
+Create DFS
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[create] read file /test/file.txt
+LOG:[create] delPos: 5
+LOG:[create] file name: file.txt
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[write] read file /test/file.txt
+LOG:[write] delPos: 5
+LOG:[write] file name: file.txt
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  test123
+
+LOG:[read] read file /test/file.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: file.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+test123
+
+LOG:[unlink] read file /test/file.txt
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: file.txt
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[rmdir] delete directory /test
+Create DFS
+Create DFS
+LOG:[read] read file /Readme.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: Readme.txt
+LOG:[read] Contents: 
+Welcome to the DFS.
+LOG:[create] read file /file.txt
+LOG:[create] delPos: 0
+LOG:[create] file name: file.txt
+LOG:[write] read file /file.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: file.txt
+LOG:[write] Contents: 
+  test
+
+LOG:[read] read file /file.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: file.txt
+LOG:[read] Contents: 
+test
+
+LOG:[create] read file /.file.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .file.txt.swp
+LOG:[create] read file /.file.txt.swx
+LOG:[create] delPos: 0
+LOG:[create] file name: .file.txt.swx
+LOG:[unlink] read file /.file.txt.swx
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .file.txt.swx
+LOG:[unlink] read file /.file.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .file.txt.swp
+LOG:[create] read file /.file.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .file.txt.swp
+LOG:[write] read file /.file.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .file.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[read] read file /file.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: file.txt
+LOG:[read] Contents: 
+test
+
+LOG:[write] read file /.file.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .file.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[create] read file /4913
+LOG:[create] delPos: 0
+LOG:[create] file name: 4913
+LOG:[unlink] read file /4913
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: 4913
+LOG:[create] read file /file.txt~
+LOG:[create] delPos: 0
+LOG:[create] file name: file.txt~
+LOG:[read] read file /file.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: file.txt
+LOG:[read] Contents: 
+
+LOG:[write] read file /file.txt~
+LOG:[write] delPos: 0
+LOG:[write] file name: file.txt~
+LOG:[write] Contents: 
+  
+LOG:[unlink] read file /file.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: file.txt
+LOG:[write] read file /file.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: file.txt
+LOG:[write] Contents: 
+  test 123
+
+LOG:[write] read file /.file.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .file.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[unlink] read file /file.txt~
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: file.txt~
+ERROR:[unlink] file does not exists
+LOG:[unlink] read file /.file.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .file.txt.swp
+LOG:[read] read file /file.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: file.txt
+LOG:[read] Contents: 
+test 123
+
+LOG:[create] read file /.file.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .file.txt.swp
+LOG:[create] read file /.file.txt.swx
+LOG:[create] delPos: 0
+LOG:[create] file name: .file.txt.swx
+LOG:[unlink] read file /.file.txt.swx
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .file.txt.swx
+LOG:[unlink] read file /.file.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .file.txt.swp
+LOG:[create] read file /.file.txt.swp
+LOG:[create] delPos: 0
+LOG:[create] file name: .file.txt.swp
+LOG:[write] read file /.file.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .file.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[read] read file /file.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: file.txt
+LOG:[read] Contents: 
+test 123
+
+LOG:[write] read file /.file.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .file.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[create] read file /4913
+LOG:[create] delPos: 0
+LOG:[create] file name: 4913
+LOG:[unlink] read file /4913
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: 4913
+LOG:[create] read file /file.txt~
+LOG:[create] delPos: 0
+LOG:[create] file name: file.txt~
+LOG:[read] read file /file.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: file.txt
+LOG:[read] Contents: 
+
+LOG:[write] read file /file.txt~
+LOG:[write] delPos: 0
+LOG:[write] file name: file.txt~
+LOG:[write] Contents: 
+  
+LOG:[unlink] read file /file.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: file.txt
+LOG:[write] read file /file.txt
+LOG:[write] delPos: 0
+LOG:[write] file name: file.txt
+LOG:[write] Contents: 
+  te
+
+LOG:[write] read file /.file.txt.swp
+LOG:[write] delPos: 0
+LOG:[write] file name: .file.txt.swp
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[unlink] read file /file.txt~
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: file.txt~
+ERROR:[unlink] file does not exists
+LOG:[unlink] read file /.file.txt.swp
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: .file.txt.swp
+LOG:[read] read file /file.txt
+LOG:[read] delPos: 0
+LOG:[read] file name: file.txt
+LOG:[read] Contents: 
+te
+t 123
+
+LOG:[unlink] read file /file.txt
+LOG:[unlink] delPos: 0
+LOG:[unlink] file name: file.txt
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[rmdir] delete directory /test
+Create DFS
+LOG:[mkdir] mkdir path: /test
+LOG:[mkdir] delPos: 0
+LOG:[mkdir] dirname: test
+LOG:[create] read file /test/file.txt
+LOG:[create] delPos: 5
+LOG:[create] file name: file.txt
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[write] read file /test/file.txt
+LOG:[write] delPos: 5
+LOG:[write] file name: file.txt
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  78687
+
+LOG:[read] read file /test/file.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: file.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+78687
+0∂
+LOG:[create] read file /test/.file.txt.swp
+LOG:[create] delPos: 5
+LOG:[create] file name: .file.txt.swp
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[create] read file /test/.file.txt.swx
+LOG:[create] delPos: 5
+LOG:[create] file name: .file.txt.swx
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[unlink] read file /test/.file.txt.swx
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: .file.txt.swx
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[unlink] read file /test/.file.txt.swp
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: .file.txt.swp
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[create] read file /test/.file.txt.swp
+LOG:[create] delPos: 5
+LOG:[create] file name: .file.txt.swp
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[write] read file /test/.file.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .file.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[read] read file /test/file.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: file.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+78687
+0∂
+LOG:[write] read file /test/.file.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .file.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[create] read file /test/4913
+LOG:[create] delPos: 5
+LOG:[create] file name: 4913
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[unlink] read file /test/4913
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: 4913
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[create] read file /test/file.txt~
+LOG:[create] delPos: 5
+LOG:[create] file name: file.txt~
+LOG:[create] wholeRoot: /test
+LOG:[create] rDelPos: 0
+LOG:[create] root: /test
+LOG:[read] read file /test/file.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: file.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+
+LOG:[write] read file /test/file.txt~
+LOG:[write] delPos: 5
+LOG:[write] file name: file.txt~
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  
+LOG:[unlink] read file /test/file.txt
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: file.txt
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[write] read file /test/file.txt
+LOG:[write] delPos: 5
+LOG:[write] file name: file.txt
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  78687 blabla
+
+LOG:[write] read file /test/.file.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .file.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[unlink] read file /test/file.txt~
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: file.txt~
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+ERROR:[unlink] file does not exists
+LOG:[write] read file /test/.file.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .file.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  tp
+LOG:[write] read file /test/.file.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .file.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  ad
+LOG:[write] read file /test/.file.txt.swp
+LOG:[write] delPos: 5
+LOG:[write] file name: .file.txt.swp
+LOG:[write] wholeRoot: /test
+LOG:[write] rDelPos: 0
+LOG:[write] root: /test
+LOG:[write] Contents: 
+  b0VIM 8.0
+LOG:[unlink] read file /test/.file.txt.swp
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: .file.txt.swp
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[read] read file /test/file.txt
+LOG:[read] delPos: 5
+LOG:[read] file name: file.txt
+LOG:[read] wholeRoot: /test
+LOG:[read] rDelPos: 0
+LOG:[read] root: /test
+LOG:[read] Contents: 
+78687 blabla
+t
+LOG:[unlink] read file /test/file.txt
+LOG:[unlink] delPos: 5
+LOG:[unlink] file name: file.txt
+LOG:[unlink] wholeRoot: /test
+LOG:[unlink] rDelPos: 0
+LOG:[unlink] root: /test
+LOG:[rmdir] delete directory /test

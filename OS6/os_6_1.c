@@ -267,7 +267,8 @@ static int os_read(const char* path, char* buff, size_t size, off_t off, struct 
 
 
     file_t* filePtr = NULL;
-    for (unsigned int i = 0; i < parent->files->length; i++) {
+    int nrFiles = parent->files->length;
+    for (unsigned int i = 0; i < nrFiles; i++) {
         file_t* ptr = (file_t *) get_p(parent->files, i);
         if (memcmp(ptr->name, fileName, strlen(fileName)) == 0){
             filePtr = ptr;
@@ -289,6 +290,7 @@ static int os_read(const char* path, char* buff, size_t size, off_t off, struct 
             size = len - off;
         }
         memcpy(buff, filePtr->contents+off, size);
+        buff[len] = '\0';
     }
     else {
         size = 0;
@@ -381,7 +383,11 @@ static int os_write(const char* path, const char* buff, size_t size, off_t off, 
 
     printlog("LOG:[write] Contents: \n  %s\n", buff);
 
+
+    filePtr->contents = realloc(filePtr->contents, size + off);
+
     memcpy(filePtr->contents + off, buff, size);
+    filePtr->contents[size] = '/0'
 
     return size;
 }
@@ -573,7 +579,7 @@ static int os_getattr(const char *path, struct stat *st) {
     dir_t* dir = find_dir(root_dir, path);
 
     if (file != NULL) {
-        st->st_mode = S_IFREG | 0444; // Requested item is (probably) a regular file
+        st->st_mode = S_IFREG | 0666; // Requested item is (probably) a regular file
         st->st_nlink = 1; // Number of hard links: a file has at least one
         st->st_size = strlen(file->contents);
     } else if (dir != NULL) {
